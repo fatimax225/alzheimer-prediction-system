@@ -11,9 +11,9 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# ────────────────────────────────────────────────────────
-# 🤖 1. تحميل نماذج المشروع الأول (البيانات النصية Tabular)
-# ────────────────────────────────────────────────────────
+
+#  1. تحميل نماذج المشروع الأول (البيانات النصية Tabular)
+
 try:
     model_tabular = joblib.load(os.path.join(BASE_DIR, "model.pkl"))
     scaler_tabular = joblib.load(os.path.join(BASE_DIR, "scaler.pkl"))
@@ -22,9 +22,9 @@ except Exception as e:
     print(f"⚠️ Warning loading tabular models: {e}")
 
 
-# ────────────────────────────────────────────────────────
-# 🧠 2. بناء كلاس الشبكة العصبية (نفس الكود الذي تدرب عليه المودل)
-# ────────────────────────────────────────────────────────
+
+#  2. بناء كلاس الشبكة العصبية (نفس الكود الذي تدرب عليه المودل)
+
 class ConvNet(torch.nn.Module):
     def __init__(self):
         super(ConvNet, self).__init__()
@@ -53,9 +53,9 @@ class ConvNet(torch.nn.Module):
         return out
 
 
-# ────────────────────────────────────────────────────────
-# 🧠 3. تحميل موديل PyTorch المُدرب للصور
-# ────────────────────────────────────────────────────────
+
+#  3. تحميل موديل PyTorch المُدرب للصور
+
 try:
     model_mri = ConvNet()
     # نستخدم map_location='cpu' ليعمل الموقع على أي جهاز حتى بدون كرت شاشة
@@ -88,9 +88,9 @@ display_aug_transform = transforms.Compose([
 ])
 
 
-# ────────────────────────────────────────────────────────
-# 🌐 4. الصفحات والمشروع الأول
-# ────────────────────────────────────────────────────────
+
+#  4. الصفحات والمشروع الأول
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -128,9 +128,9 @@ def predict():
         return f"حدث خطأ أثناء معالجة البيانات: {str(e)}", 400
 
 
-# ────────────────────────────────────────────────────────
-# 🖼️ 5. المشروع الثاني (التنبؤ بصور الرنين - PyTorch)
-# ────────────────────────────────────────────────────────
+
+#  5. المشروع الثاني (التنبؤ بصور الرنين - PyTorch)
+
 @app.route('/predict_mri', methods=['POST'])
 def predict_mri():
     try:
@@ -148,7 +148,7 @@ def predict_mri():
         # 1. قراءة الصورة باستخدام PIL وتحويلها لـ RGB
         img = Image.open(upload_path).convert('RGB')
 
-        # 2. 🌟 توليد صور طبية معدلة (للعرض في الموقع) 🌟
+        # 2.  توليد صور طبية معدلة (للعرض في الموقع)
         aug_paths = []
         for i in range(3):
             aug_img = display_aug_transform(img)
