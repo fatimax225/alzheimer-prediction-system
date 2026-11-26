@@ -57,7 +57,7 @@ The graduation project presentation is available upon request.
 
 ## Live Demo
 
-Coming Soon.
+[Watch Demo Video](https://drive.google.com/file/d/1nlcJGCuX_4tNAA3Wt22N1FmlNzv_cuTN/view?usp=sharing)
 
 ## Author
 
